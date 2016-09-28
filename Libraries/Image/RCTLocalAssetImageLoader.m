@@ -45,7 +45,7 @@ static NSString *bundleName(NSBundle *bundle)
   return name;
 }
 
-static NSBundle *bundleForPath(NSString *key)
+static NSBundle *bundleForName(NSString *key)
 {
   static NSMutableDictionary *bundleCache;
   if (!bundleCache) {
@@ -66,6 +66,10 @@ static NSBundle *bundleForPath(NSString *key)
   return bundleCache[key];
 }
 
+static NSBundle *bundleForIdentifier(NSString *identifier) {
+  return [NSBundle bundleWithIdentifier:identifier];
+}
+
  - (RCTImageLoaderCancellationBlock)loadImageForURL:(NSURL *)imageURL
                                                size:(CGSize)size
                                               scale:(CGFloat)scale
@@ -84,11 +88,15 @@ static NSBundle *bundleForPath(NSString *key)
 
     NSBundle *bundle;
     NSArray *imagePathComponents = [imageName pathComponents];
-    if ([imagePathComponents count] > 1 &&
-        [[[imagePathComponents firstObject] pathExtension] isEqualToString:@"bundle"]) {
-      NSString *bundlePath = [imagePathComponents firstObject];
-      bundle = bundleForPath([bundlePath stringByDeletingPathExtension]);
-      imageName = [imageName substringFromIndex:(bundlePath.length + 1)];
+    if ([imagePathComponents count] > 1) {
+      NSString *pathExtension = [[imagePathComponents firstObject] pathExtension];
+      NSString *bundleName = [imagePathComponents firstObject];
+      if ([pathExtension isEqualToString:@"bundleIdentifier"]) {
+        bundle = bundleForIdentifier([bundleName stringByDeletingPathExtension]);
+      } else if ([pathExtension isEqualToString:@"bundle"]) {
+        bundle = bundleForName([bundleName stringByDeletingPathExtension]);
+      }
+      imageName = [imageName substringFromIndex:(bundleName.length + 1)];
     }
 
     UIImage *image;

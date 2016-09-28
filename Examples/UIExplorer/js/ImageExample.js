@@ -642,6 +642,15 @@ exports.examples = [
             }}
             style={{marginLeft: 10, borderColor: 'blue', borderWidth: 4}}
           />
+          <Image
+            source={{
+              url: 'ImageInBundle',
+              bundleIdentifier: 'com.facebook.UIExplorerBundle',
+              width: 100,
+              height: 100,
+            }}
+            style={{marginLeft: 10, borderColor: 'blue', borderWidth: 4}}
+          />
         </View>
       );
     },

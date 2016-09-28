@@ -128,8 +128,11 @@ RCT_CUSTOM_CONVERTER(NSData *, NSData, [json dataUsingEncoding:NSUTF8StringEncod
     NSString *URLString = json[@"uri"] ?: json[@"url"];
 
     NSURL *URL;
+    NSString *bundleIdentifier = json[@"bundleIdentifier"];
     NSString *bundleName = json[@"bundle"];
-    if (bundleName) {
+    if (bundleIdentifier) {
+      URLString = [NSString stringWithFormat:@"%@.bundleIdentifier/%@", bundleIdentifier, URLString];
+    } else if (bundleName) {
       URLString = [NSString stringWithFormat:@"%@.bundle/%@", bundleName, URLString];
     }
 

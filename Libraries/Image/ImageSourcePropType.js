@@ -28,6 +28,13 @@ const ImageURISourcePropType = PropTypes.shape({
    */
   bundle: PropTypes.string,
   /**
+   * `bundleIdentifier` is the identifier, i.e. `com.example.MyWidgets`, of iOS
+   * asset bundle which the image is included in. This will default to the
+   * `bundle` prop if set, or [NSBundle mainBundle] if neither is set.
+   * @platform ios
+   */
+  bundleIdentifier: PropTypes.string,
+  /**
    * `method` is the HTTP Method to use. Defaults to GET if not specified.
    */
   method: PropTypes.string,
