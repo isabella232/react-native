@@ -376,6 +376,9 @@ static UIImage *RCTResizeImageIfNeeded(UIImage *image,
     } else {
       // Use networking module to load image
       cancelLoad = [strongSelf _loadURLRequest:request
+                                          size:size
+                                         scale:scale
+                                    resizeMode:resizeMode
                                  progressBlock:progressHandler
                                completionBlock:completionHandler];
     }
@@ -391,6 +394,9 @@ static UIImage *RCTResizeImageIfNeeded(UIImage *image,
 }
 
 - (RCTImageLoaderCancellationBlock)_loadURLRequest:(NSURLRequest *)request
+                                              size:(CGSize)size
+                                             scale:(CGFloat)scale
+                                        resizeMode:(RCTResizeMode)resizeMode
                                      progressBlock:(RCTImageLoaderProgressBlock)progressHandler
                                    completionBlock:(void (^)(NSError *error, id imageOrData, NSString *fetchDate))completionHandler
 {
@@ -401,6 +407,17 @@ static UIImage *RCTResizeImageIfNeeded(UIImage *image,
                 request.URL.absoluteString);
     return NULL;
   }
+
+  UIImage *image = [[self imageCache] imageForUrl:request.URL.absoluteString
+                                                   size:size
+                                                  scale:scale
+                                             resizeMode:resizeMode
+                                           responseDate:@""];
+  if (image) {
+    completionHandler(nil, image, @"");
+    return ^{ };
+  }
+
 
   RCTNetworking *networking = [_bridge networking];
 
