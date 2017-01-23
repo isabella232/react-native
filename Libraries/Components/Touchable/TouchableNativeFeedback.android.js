@@ -26,7 +26,7 @@ var rippleBackgroundPropType = PropTypes.shape({
   type: React.PropTypes.oneOf(['RippleAndroid']),
   color: PropTypes.number,
   borderless: PropTypes.bool,
-  borderWithRadius: PropTypes.bool
+  borderRadiusContain: PropTypes.bool,
 });
 
 var themeAttributeBackgroundPropType = PropTypes.shape({
@@ -119,15 +119,15 @@ var TouchableNativeFeedback = React.createClass({
      *
      * @param color The ripple color
      * @param borderless If the ripple can render outside it's bounds
-     * @param borderWithRadius If the ripple should be contained with the target's border-radius, if defined. Only
+     * @param borderRadiusContain If the ripple should be contained with the target's border-radius, if defined. Only
      * used if {@code borderless} is false.
      */
-    Ripple: function(color: string, borderless: boolean, borderWithRadius: boolean) {
+    Ripple: function(color: string, borderless: boolean, borderRadiusContain: boolean) {
       return {
         type: 'RippleAndroid',
         color: processColor(color),
         borderless: borderless,
-        borderWithRadius: borderWithRadius
+        borderWithRadius: borderRadiusContain,
       };
     },
 

@@ -262,7 +262,7 @@ public class ReactViewBackgroundDrawable extends Drawable {
     float bottomRightRadius = mBorderCornerRadii != null && !CSSConstants.isUndefined(mBorderCornerRadii[2]) ? mBorderCornerRadii[2] : defaultBorderRadius;
     float bottomLeftRadius = mBorderCornerRadii != null && !CSSConstants.isUndefined(mBorderCornerRadii[3]) ? mBorderCornerRadii[3] : defaultBorderRadius;
 
-    return  new float[] {
+    return new float[] {
       topLeftRadius,
       topLeftRadius,
       topRightRadius,
