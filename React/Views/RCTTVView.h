@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <React/RCTView.h>
+#import "RCTView.h"
 
 //  A RCTView with additional properties and methods for user interaction using the Apple TV focus engine.
 @interface RCTTVView : RCTView

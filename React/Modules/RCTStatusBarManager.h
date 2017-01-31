@@ -9,8 +9,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTConvert.h>
-#import <React/RCTEventEmitter.h>
+#import "RCTConvert.h"
+#import "RCTEventEmitter.h"
 
 @interface RCTConvert (UIStatusBar)
 

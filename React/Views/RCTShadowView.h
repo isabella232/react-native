@@ -9,8 +9,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTComponent.h>
-#import <React/RCTRootView.h>
+#import "RCTComponent.h"
+#import "RCTRootView.h"
 #import <yoga/Yoga.h>
 
 @class RCTSparseArray;

@@ -7,8 +7,8 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <React/RCTEventEmitter.h>
-#import <React/RCTNetworkTask.h>
+#import "RCTEventEmitter.h"
+#import "RCTNetworkTask.h"
 
 @interface RCTNetworking : RCTEventEmitter
 

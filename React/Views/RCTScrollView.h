@@ -9,10 +9,10 @@
 
 #import <UIKit/UIScrollView.h>
 
-#import <React/RCTAutoInsetsProtocol.h>
-#import <React/RCTEventDispatcher.h>
-#import <React/RCTScrollableProtocol.h>
-#import <React/RCTView.h>
+#import "RCTAutoInsetsProtocol.h"
+#import "RCTEventDispatcher.h"
+#import "RCTScrollableProtocol.h"
+#import "RCTView.h"
 
 @protocol UIScrollViewDelegate;
 

@@ -9,7 +9,7 @@
 
 #import <MapKit/MapKit.h>
 
-#import <React/RCTConvert.h>
+#import "RCTConvert.h"
 
 @class RCTMapAnnotation;
 @class RCTMapOverlay;

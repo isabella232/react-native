@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTEventEmitter.h>
+#import "RCTEventEmitter.h"
 
 @interface RCTLinkingManager : RCTEventEmitter
 

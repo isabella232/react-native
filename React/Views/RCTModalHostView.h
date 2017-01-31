@@ -9,9 +9,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTInvalidating.h>
-#import <React/RCTModalHostViewManager.h>
-#import <React/RCTView.h>
+#import "RCTInvalidating.h"
+#import "RCTModalHostViewManager.h"
+#import "RCTView.h"
 
 @class RCTBridge;
 @class RCTModalHostViewController;
