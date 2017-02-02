@@ -57,6 +57,7 @@ function copyProjectTemplateAndReplace(srcPath, destPath, newProjectName, option
       absoluteSrcFilePath,
       path.resolve(destPath, relativeRenamedPath),
       {
+        'Hello App Name': options.displayName || newProjectName,
         'HelloWorld': newProjectName,
         'helloworld': newProjectName.toLowerCase(),
       },
