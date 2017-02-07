@@ -11,7 +11,7 @@
 
 #import <React/RCTComponent.h>
 #import <React/RCTRootView.h>
-#import <yoga/Yoga.h>
+#import <React/Yoga.h>
 
 @class RCTSparseArray;
 

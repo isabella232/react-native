@@ -15,7 +15,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTShadowView+Layout.h>
 #import <React/UIView+React.h>
-#import <yoga/Yoga.h>
+#import <React/Yoga.h>
 
 #import "RCTShadowRawText.h"
 #import "RCTShadowText.h"

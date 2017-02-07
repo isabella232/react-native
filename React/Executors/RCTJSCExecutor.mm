@@ -17,8 +17,8 @@
 
 #import <UIKit/UIDevice.h>
 
-#import <cxxreact/JSBundleType.h>
-#import <jschelpers/JavaScriptCore.h>
+#import <React/JSBundleType.h>
+#import <React/JavaScriptCore.h>
 #import <React/RCTAssert.h>
 #import <React/RCTBridge+Private.h>
 #import <React/RCTDefines.h>

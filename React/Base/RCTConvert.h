@@ -16,7 +16,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTPointerEvents.h>
 #import <React/RCTTextDecorationLineType.h>
-#import <yoga/Yoga.h>
+#import <React/Yoga.h>
 
 /**
  * This class provides a collection of conversion functions for mapping
