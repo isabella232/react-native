@@ -15,6 +15,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build.VERSION;
 import android.text.Layout;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -67,15 +68,18 @@ public class ReactTextView extends TextView implements ReactCompoundView {
       (int) Math.floor(update.getPaddingRight()),
       (int) Math.floor(update.getPaddingBottom()));
 
-    float nextLetterSpacing = update.getLetterSpacing();
-    int fontSize = update.getFontSize();
-    if (!FloatUtil.floatsEqual(mLetterSpacing, nextLetterSpacing)) {
-      mLetterSpacing = nextLetterSpacing;
-      if(Float.isNaN(mLetterSpacing)) {
-        setLetterSpacing((float)0.0);
-      } else {
-        //calculate EM from proper font pixels
-        setLetterSpacing(1+(mLetterSpacing-PixelUtil.toDIPFromPixel(fontSize))/PixelUtil.toDIPFromPixel(fontSize));
+    // API 21+: https://developer.android.com/reference/android/widget/TextView.html#setLetterSpacing(float)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      float nextLetterSpacing = update.getLetterSpacing();
+      int fontSize = update.getFontSize();
+      if (!FloatUtil.floatsEqual(mLetterSpacing, nextLetterSpacing)) {
+        mLetterSpacing = nextLetterSpacing;
+        if(Float.isNaN(mLetterSpacing)) {
+          setLetterSpacing((float)0.0);
+        } else {
+          //calculate EM from proper font pixels
+          setLetterSpacing(1+(mLetterSpacing-PixelUtil.toDIPFromPixel(fontSize))/PixelUtil.toDIPFromPixel(fontSize));
+        }
       }
     }
 
