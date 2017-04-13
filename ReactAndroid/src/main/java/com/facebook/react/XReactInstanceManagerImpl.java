@@ -138,6 +138,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
   private final JSCConfig mJSCConfig;
   private final boolean mLazyNativeModulesEnabled;
   private final boolean mLazyViewManagersEnabled;
+  private final boolean mManuallyEnableDevSupport;
 
   private final ReactInstanceDevCommandsHandler mDevInterface =
       new ReactInstanceDevCommandsHandler() {
@@ -297,7 +298,8 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
     JSCConfig jscConfig,
     @Nullable RedBoxHandler redBoxHandler,
     boolean lazyNativeModulesEnabled,
-    boolean lazyViewManagersEnabled) {
+    boolean lazyViewManagersEnabled,
+    boolean manuallyEnableDevSupport) {
 
     initializeSoLoaderIfNecessary(applicationContext);
 
@@ -326,6 +328,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
     mJSCConfig = jscConfig;
     mLazyNativeModulesEnabled = lazyNativeModulesEnabled;
     mLazyViewManagersEnabled = lazyViewManagersEnabled;
+    mManuallyEnableDevSupport = manuallyEnableDevSupport;
   }
 
   @Override
@@ -497,7 +500,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
     UiThreadUtil.assertOnUiThread();
 
     mDefaultBackButtonImpl = null;
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 
@@ -531,7 +534,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
     UiThreadUtil.assertOnUiThread();
 
     mDefaultBackButtonImpl = defaultBackButtonImpl;
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(true);
     }
 

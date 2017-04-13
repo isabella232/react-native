@@ -236,6 +236,7 @@ public abstract class ReactInstanceManager {
     protected @Nullable RedBoxHandler mRedBoxHandler;
     protected boolean mLazyNativeModulesEnabled;
     protected boolean mLazyViewManagersEnabled;
+    protected boolean mManuallyEnableDevSupport;
 
     protected Builder() {
     }
@@ -379,6 +380,17 @@ public abstract class ReactInstanceManager {
     }
 
     /**
+     * By default, the developer support tools will be enabled and disabled in {@link #onHostPause()}
+     * and {@link #onHostResume(Activity, DefaultHardwareBackBtnHandler)}. This may not be ideal for
+     * multi-activity applications that often switch between native and react native screens or
+     * apps that want tighter control over when the dev tools should be enabled.
+     */
+    public Builder manuallyEnableDevSupport() {
+      mManuallyEnableDevSupport = true;
+      return this;
+    }
+
+    /**
      * Instantiates a new {@link ReactInstanceManagerImpl}.
      * Before calling {@code build}, the following must be called:
      * <ul>
@@ -422,7 +434,8 @@ public abstract class ReactInstanceManager {
         mJSCConfig,
         mRedBoxHandler,
         mLazyNativeModulesEnabled,
-        mLazyViewManagersEnabled);
+        mLazyViewManagersEnabled,
+        mManuallyEnableDevSupport);
     }
   }
 }
