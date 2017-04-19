@@ -546,7 +546,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
   public void onHostDestroy() {
     UiThreadUtil.assertOnUiThread();
 
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 
@@ -565,7 +565,7 @@ import static com.facebook.systrace.Systrace.TRACE_TAG_REACT_JAVA_BRIDGE;
   public void destroy() {
     UiThreadUtil.assertOnUiThread();
 
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 
