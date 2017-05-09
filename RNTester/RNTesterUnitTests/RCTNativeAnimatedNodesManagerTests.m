@@ -13,7 +13,7 @@
 #import <OCMock/OCMock.h>
 
 #import <RCTAnimation/RCTNativeAnimatedNodesManager.h>
-#import <RCTAnimation/RCTValueAnimatedNode.h>
+#import <RCTValueAnimatedNode.h>
 #import <React/RCTUIManager.h>
 
 static const NSTimeInterval FRAME_LENGTH = 1.0 / 60.0;
