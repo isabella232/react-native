@@ -28,6 +28,7 @@ type GeoOptions = {
   maximumAge: number,
   enableHighAccuracy: bool,
   distanceFilter: number,
+  locationPermissionIOS: number,
 }
 
 /**
