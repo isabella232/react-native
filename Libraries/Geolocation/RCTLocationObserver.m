@@ -46,18 +46,18 @@ typedef struct {
 + (RCTLocationOptions)RCTLocationOptions:(id)json
 {
   NSDictionary<NSString *, id> *options = [RCTConvert NSDictionary:json];
-
+  
   double distanceFilter = options[@"distanceFilter"] == NULL ? RCT_DEFAULT_LOCATION_ACCURACY
-    : [RCTConvert double:options[@"distanceFilter"]] ?: kCLDistanceFilterNone;
+  : [RCTConvert double:options[@"distanceFilter"]] ?: kCLDistanceFilterNone;
   
   int locationPermission = options[@"locationPermissionIOS"] == NULL ? RCTLocationPermissionIOSUnknown
-    : [RCTConvert int:options[@"locationPermissionIOS"]] ?: RCTLocationPermissionIOSUnknown
-
+  : [RCTConvert int:options[@"locationPermissionIOS"]] ?: RCTLocationPermissionIOSUnknown;
+  
   return (RCTLocationOptions){
     .timeout = [RCTConvert NSTimeInterval:options[@"timeout"]] ?: INFINITY,
     .maximumAge = [RCTConvert NSTimeInterval:options[@"maximumAge"]] ?: INFINITY,
     .accuracy = [RCTConvert BOOL:options[@"enableHighAccuracy"]] ? kCLLocationAccuracyBest : RCT_DEFAULT_LOCATION_ACCURACY,
-    .distanceFilter = distanceFilter
+    .distanceFilter = distanceFilter,
     .locationPermission = locationPermission
   };
 }
@@ -177,14 +177,14 @@ RCT_EXPORT_MODULE()
       }
       break;
   }
-
+  
   _locationManager.distanceFilter  = distanceFilter;
   _locationManager.desiredAccuracy = desiredAccuracy;
   // Start observing location
   [_locationManager startUpdatingLocation];
 }
 
-- (void) requestAlwaysAuthorizationHelper:(CLLocationManager)locationManager
+- (void) requestAlwaysAuthorizationHelper:(CLLocationManager*)locationManager
 {
   [locationManager requestAlwaysAuthorization];
   
