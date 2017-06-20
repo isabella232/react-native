@@ -41,6 +41,21 @@ typedef struct {
   RCTLocationPermissionCode locationPermission;
 } RCTLocationOptions;
 
+@implementation RCTConvert (RCTLocationPermissionCode)
+
+RCT_ENUM_CONVERTER(RCTLocationPermissionCode,
+                   (@{
+                      @"locationPermissionIOSUnknown" : @(RCTLocationPermissionIOSUnknown),
+                      @"locationPermissionIOSWhenInUse" : @(RCTLocationPermissionIOSWhenInUse),
+                      @"locationPermissionIOSAlways" : @(RCTLocationPermissionIOSAlways)
+                      }
+                    ),
+                   RCTLocationPermissionIOSUnknown,
+                   integerValue
+                   )
+
+@end
+
 @implementation RCTConvert (RCTLocationOptions)
 
 + (RCTLocationOptions)RCTLocationOptions:(id)json
@@ -51,7 +66,7 @@ typedef struct {
   : [RCTConvert double:options[@"distanceFilter"]] ?: kCLDistanceFilterNone;
   
   int locationPermission = options[@"locationPermissionIOS"] == NULL ? RCTLocationPermissionIOSUnknown
-  : [RCTConvert int:options[@"locationPermissionIOS"]] ?: RCTLocationPermissionIOSUnknown;
+  : [RCTConvert RCTLocationPermissionCode:options[@"locationPermissionIOS"]] ?: RCTLocationPermissionIOSUnknown;
   
   return (RCTLocationOptions){
     .timeout = [RCTConvert NSTimeInterval:options[@"timeout"]] ?: INFINITY,

@@ -28,7 +28,7 @@ type GeoOptions = {
   maximumAge: number,
   enableHighAccuracy: bool,
   distanceFilter: number,
-  locationPermissionIOS: number,
+  locationPermissionIOS: string,
 }
 
 /**
@@ -143,6 +143,11 @@ var Geolocation = {
       subscriptions = [];
     }
   }
+};
+
+Geolocation.IOS_PERMISSIONS = {
+  WHEN_IN_USE: "locationPermissionIOSWhenInUse",
+  ALWAYS: "locationPermissionIOSAlways",
 };
 
 module.exports = Geolocation;
