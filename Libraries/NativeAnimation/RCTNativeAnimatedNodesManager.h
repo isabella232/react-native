@@ -9,7 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <RCTAnimation/RCTValueAnimatedNode.h>
+// This is only necessary until https://github.com/facebook/react-native/issues/13198 is fixed
+#import "RCTValueAnimatedNode.h"
 #import <React/RCTBridgeModule.h>
 #import <React/RCTUIManager.h>
 
