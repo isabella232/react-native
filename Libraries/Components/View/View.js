@@ -255,6 +255,12 @@ const View = React.createClass({
      */
     onMagicTap: PropTypes.func,
 
+    focusedByDefault: PropTypes.bool,
+    focusable: PropTypes.bool,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
+    onSelect: PropTypes.func,
+
     /**
      * Used to locate this view in end-to-end tests.
      *

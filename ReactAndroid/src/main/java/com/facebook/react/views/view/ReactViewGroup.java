@@ -32,6 +32,14 @@ import com.facebook.react.uimanager.ReactClippingViewGroup;
 import com.facebook.react.uimanager.ReactClippingViewGroupHelper;
 import com.facebook.react.uimanager.ReactPointerEventsView;
 
+/* focusable */
+import android.view.*;
+import android.util.Log;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
+
 /**
  * Backing for a React View. Has support for borders, but since borders aren't common, lazy
  * initializes most of the storage needed for them.
@@ -191,6 +199,55 @@ public class ReactViewGroup extends ViewGroup implements
   public boolean hasOverlappingRendering() {
     return mNeedsOffscreenAlphaCompositing;
   }
+
+  private static View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+      ReactViewGroup view = (ReactViewGroup)v;
+      if (view == null) return;
+
+      WritableMap event = Arguments.createMap();
+      ReactContext reactContext = (ReactContext)view.getContext();
+      reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+          view.getId(),
+          hasFocus ? "topFocus" : "topBlur",
+          event);
+    }
+  };
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) {
+      if (event.getRepeatCount() == 0) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+          // Update the ship object to fire lasers
+          WritableMap e = Arguments.createMap();
+          ReactContext reactContext = (ReactContext)getContext();
+          reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+              getId(),
+              "topSelect",
+              e);
+          return true;
+        }
+      }
+    }
+    return super.onKeyDown(keyCode, event);
+  }
+
+  @Override
+  public void setFocusable(boolean focusable) {
+    super.setFocusable(focusable);
+    setOnFocusChangeListener(focusable ? onFocusChangeListener : null);
+  }
+
+  public void setFocusedByDefault(boolean focusedByDefault) {
+    if (focusedByDefault) {
+      setFocusable(true);
+      requestFocus();
+    }
+  }
+
+
 
   /**
    * See the documentation of needsOffscreenAlphaCompositing in View.js.

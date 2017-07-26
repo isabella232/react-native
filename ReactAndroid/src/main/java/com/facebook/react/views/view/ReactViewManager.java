@@ -159,6 +159,16 @@ public class ReactViewManager extends ViewGroupManager<ReactViewGroup> {
     // handled in NativeViewHierarchyOptimizer
   }
 
+  @ReactProp(name = "focusable")
+  public void setFocusable(ReactViewGroup view, boolean focusable) {
+    view.setFocusable(focusable);
+  }
+
+  @ReactProp(name = "focusedByDefault")
+  public void setFocusedByDefault(ReactViewGroup view, boolean focusedByDefault) {
+    view.setFocusedByDefault(focusedByDefault);
+  }
+
   @Override
   public String getName() {
     return REACT_CLASS;
