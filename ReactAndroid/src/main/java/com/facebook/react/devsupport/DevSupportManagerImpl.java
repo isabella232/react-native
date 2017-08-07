@@ -610,12 +610,14 @@ public class DevSupportManagerImpl implements
 
     if (mDevSettings.isHotModuleReplacementEnabled() && mCurrentContext != null) {
       try {
-        URL sourceUrl = new URL(getSourceUrl());
-        String path = sourceUrl.getPath().substring(1); // strip initial slash in path
-        String host = sourceUrl.getHost();
-        int port = sourceUrl.getPort();
-        mCurrentContext.getJSModule(HMRClient.class).enable("android", path, host, port);
-      } catch (MalformedURLException e) {
+        Uri sourceUrl = Uri.parse(getSourceUrl());
+        if ("true".equalsIgnoreCase(sourceUrl.getQueryParameter("hot"))) {
+          String path = sourceUrl.getPath().substring(1); // strip initial slash in path
+          String host = sourceUrl.getHost();
+          int port = sourceUrl.getPort();
+          mCurrentContext.getJSModule(HMRClient.class).enable("android", path, host, port);
+        }
+      } catch (NullPointerException e) {
         showNewJavaError(e.getMessage(), e);
       }
     }
