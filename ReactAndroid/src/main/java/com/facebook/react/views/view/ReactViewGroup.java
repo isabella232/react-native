@@ -35,6 +35,7 @@ import com.facebook.react.uimanager.ReactPointerEventsView;
 /* focusable */
 import android.view.*;
 import android.util.Log;
+import com.facebook.react.bridge.*;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -104,6 +105,7 @@ public class ReactViewGroup extends ViewGroup implements
   private @Nullable ReactViewBackgroundDrawable mReactBackgroundDrawable;
   private @Nullable OnInterceptTouchEventListener mOnInterceptTouchEventListener;
   private boolean mNeedsOffscreenAlphaCompositing = false;
+  private ReadableMap mFocusedRectSlop = null;
 
   public ReactViewGroup(Context context) {
     super(context);
@@ -247,7 +249,55 @@ public class ReactViewGroup extends ViewGroup implements
     }
   }
 
+  @Override
+  public void getDrawingRect(Rect r) {
+    super.getDrawingRect(r);
+    Log.d("ReactViewGroup", "getFocusedRect");
+    if (mFocusedRectSlop != null) {
+      if (mFocusedRectSlop.hasKey("top") && mFocusedRectSlop.getType("top") == ReadableType.Number) {
+        r.top -= mFocusedRectSlop.getInt("top");
+      }
+      if (mFocusedRectSlop.hasKey("bottom") && mFocusedRectSlop.getType("bottom") == ReadableType.Number) {
+        Log.d("ReactViewGroup", "bottom");
+        r.bottom += mFocusedRectSlop.getInt("bottom");
+      }
+      if (mFocusedRectSlop.hasKey("left") && mFocusedRectSlop.getType("left") == ReadableType.Number) {
+        r.left -= mFocusedRectSlop.getInt("left");
+      }
+      if (mFocusedRectSlop.hasKey("right") && mFocusedRectSlop.getType("right") == ReadableType.Number) {
+        r.right += mFocusedRectSlop.getInt("right");
+      }
+    }
+  }
 
+  public void setFocusedRectSlop(ReadableMap slop) {
+    Log.d("ReactViewGroup", "setFocusedRectSlop");
+    mFocusedRectSlop = slop;
+  }
+
+  public void setFocusableId(int focusableId) {
+    setId(focusableId);
+  }
+
+  @Override
+  public void setNextFocusDownId(int nextFocusDownId) {
+    super.setNextFocusDownId(nextFocusDownId);
+  }
+
+  @Override
+  public void setNextFocusLeftId(int nextFocusLeftId) {
+    super.setNextFocusLeftId(nextFocusLeftId);
+  }
+
+  @Override
+  public void setNextFocusRightId(int nextFocusRightId) {
+    super.setNextFocusRightId(nextFocusRightId);
+  }
+
+  @Override
+  public void setNextFocusUpId(int nextFocusUpId) {
+    super.setNextFocusUpId(nextFocusUpId);
+  }
 
   /**
    * See the documentation of needsOffscreenAlphaCompositing in View.js.

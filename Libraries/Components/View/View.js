@@ -256,7 +256,18 @@ const View = React.createClass({
     onMagicTap: PropTypes.func,
 
     focusedByDefault: PropTypes.bool,
+    focusedRectSlop: PropTypes.shape({
+      top: PropTypes.number,
+      bottom: PropTypes.number,
+      left: PropTypes.number,
+      right: PropTypes.number,
+    }),
     focusable: PropTypes.bool,
+    focusableId: PropTypes.number,
+    nextFocusDownId: PropTypes.number,
+    nextFocusLeftId: PropTypes.number,
+    nextFocusRightId: PropTypes.number,
+    nextFocusUpId: PropTypes.number,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onSelect: PropTypes.func,

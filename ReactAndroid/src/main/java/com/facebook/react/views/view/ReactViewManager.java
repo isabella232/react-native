@@ -18,6 +18,7 @@ import android.annotation.TargetApi;
 import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
+import android.util.Log;
 
 import com.facebook.yoga.YogaConstants;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
@@ -167,6 +168,52 @@ public class ReactViewManager extends ViewGroupManager<ReactViewGroup> {
   @ReactProp(name = "focusedByDefault")
   public void setFocusedByDefault(ReactViewGroup view, boolean focusedByDefault) {
     view.setFocusedByDefault(focusedByDefault);
+  }
+
+  @ReactProp(name = "focusedRectSlop")
+  public void setFocusedRectSlop(ReactViewGroup view, ReadableMap focusedRectSlop) {
+    Log.d("ReactViewManager", "setFocusedRectSlop");
+    view.setFocusedRectSlop(focusedRectSlop);
+  }
+
+  @ReactProp(name = "focusableId")
+  public void setFocusableId(ReactViewGroup view, Integer focusableId) {
+    if (focusableId != null) {
+      Log.d("ReactViewManager", "setFocusableId");
+      view.setFocusableId(focusableId);
+    }
+  }
+
+  @ReactProp(name = "nextFocusDownId")
+  public void setNextFocusDownId(ReactViewGroup view, Integer nextFocusDownId) {
+    if (nextFocusDownId != null) {
+      Log.d("ReactViewManager", "setNextFocusDownId");
+      view.setNextFocusDownId(nextFocusDownId);
+    }
+  }
+
+  @ReactProp(name = "nextFocusLeftId")
+  public void setNextFocusLeftId(ReactViewGroup view, Integer nextFocusLeftId) {
+    if (nextFocusLeftId != null) {
+      Log.d("ReactViewManager", "setNextFocusLeftId");
+      view.setNextFocusLeftId(nextFocusLeftId);
+    }
+  }
+
+  @ReactProp(name = "nextFocusRightId")
+  public void setNextFocusRightId(ReactViewGroup view, Integer nextFocusRightId) {
+    if (nextFocusRightId != null) {
+      Log.d("ReactViewManager", "setNextFocusRightId");
+      view.setNextFocusRightId(nextFocusRightId);
+    }
+  }
+
+  @ReactProp(name = "nextFocusUpId")
+  public void setNextFocusUpId(ReactViewGroup view, Integer nextFocusUpId) {
+    if (nextFocusUpId != null) {
+      Log.d("ReactViewManager", "setNextFocusUpId");
+      view.setNextFocusUpId(nextFocusUpId);
+    }
   }
 
   @Override
