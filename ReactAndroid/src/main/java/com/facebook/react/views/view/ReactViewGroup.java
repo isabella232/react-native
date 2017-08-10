@@ -275,10 +275,6 @@ public class ReactViewGroup extends ViewGroup implements
     mFocusedRectSlop = slop;
   }
 
-  public void setFocusableId(int focusableId) {
-    setId(focusableId);
-  }
-
   @Override
   public void setNextFocusDownId(int nextFocusDownId) {
     super.setNextFocusDownId(nextFocusDownId);

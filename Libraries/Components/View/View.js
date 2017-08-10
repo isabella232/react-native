@@ -263,7 +263,6 @@ const View = React.createClass({
       right: PropTypes.number,
     }),
     focusable: PropTypes.bool,
-    focusableId: PropTypes.number,
     nextFocusDownId: PropTypes.number,
     nextFocusLeftId: PropTypes.number,
     nextFocusRightId: PropTypes.number,

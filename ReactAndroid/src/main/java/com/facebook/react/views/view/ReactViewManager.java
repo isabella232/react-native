@@ -176,14 +176,6 @@ public class ReactViewManager extends ViewGroupManager<ReactViewGroup> {
     view.setFocusedRectSlop(focusedRectSlop);
   }
 
-  @ReactProp(name = "focusableId")
-  public void setFocusableId(ReactViewGroup view, Integer focusableId) {
-    if (focusableId != null) {
-      Log.d("ReactViewManager", "setFocusableId");
-      view.setFocusableId(focusableId);
-    }
-  }
-
   @ReactProp(name = "nextFocusDownId")
   public void setNextFocusDownId(ReactViewGroup view, Integer nextFocusDownId) {
     if (nextFocusDownId != null) {
