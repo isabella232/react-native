@@ -370,6 +370,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (void)setRemoveClippedSubviews:(BOOL)removeClippedSubviews
 {
+  // removeClippedSubviews prevents VoiceOver from navigating through scrollViews properly,
+  // so we always disable removing clipped subviews when VoiceOver is active.
+  if (UIAccessibilityIsVoiceOverRunning()) {
+    RCTLogInfo(@"removeClippedSubviews is disabled when VoiceOver is active");
+    removeClippedSubviews = NO;
+  }
   if (!removeClippedSubviews && _removeClippedSubviews) {
     [self react_remountAllSubviews];
   }
