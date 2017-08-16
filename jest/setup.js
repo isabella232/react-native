@@ -41,7 +41,6 @@ jest
   .mock('Modal', () => mockComponent('Modal'))
   .mock('View', () => mockComponent('View'))
   .mock('RefreshControl', () => require.requireMock('RefreshControlMock'))
-  .mock('Animated', () => require.requireActual('./Animated'))
   .mock('ScrollView', () => require.requireMock('ScrollViewMock'))
   .mock(
     'ActivityIndicator',
