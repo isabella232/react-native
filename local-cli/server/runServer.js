@@ -162,6 +162,7 @@ function getPackagerServer(args, config) {
     verbose: args.verbose,
     watch: !args.nonPersistent,
     workerPath: config.getWorkerPath(),
+    makeModuleId: config.makeModuleId || ((m, id) => id),
   });
 }
 
