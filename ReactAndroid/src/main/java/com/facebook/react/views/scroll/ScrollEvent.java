@@ -142,6 +142,7 @@ public class ScrollEvent extends Event<ScrollEvent> {
 
     event.putInt("target", getViewTag());
     event.putBoolean("responderIgnoreScroll", true);
+    event.putString("androidEventType", mScrollEventType.getJSEventName());
     return event;
   }
 }
