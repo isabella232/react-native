@@ -6,39 +6,14 @@ const fs = require('fs');
  * Ignore any descendants of the paths in `ignoredRoots`.
  */
 module.exports = function findSymlinksPaths(lookupFolder, ignoredRoots) {
-  const timeStart = Date.now();
-  const folders = fs.readdirSync(lookupFolder);
-
-  const resolvedSymlinks = [];
-  folders.forEach(folder => {
-    const visited = [];
-
-    let symlink = path.resolve(lookupFolder, folder);
-    while (fs.lstatSync(symlink).isSymbolicLink()) {
-      const index = visited.indexOf(symlink);
-      if (index !== -1) {
-        throw Error(
-          `Infinite symlink recursion detected:\n  ` +
-            visited.slice(index).join(`\n  `)
-        );
-      }
-
-      visited.push(symlink);
-      symlink = path.resolve(
-        path.dirname(symlink),
-        fs.readlinkSync(symlink)
-      );
-    }
-
-    if (visited.length && !rootExists(ignoredRoots, symlink)) {
-      resolvedSymlinks.push(symlink);
-    }
-  });
-
-  const timeEnd = Date.now();
-  console.log(`Scanning ${folders.length} folders for symlinks in ${lookupFolder} (${timeEnd - timeStart}ms)`);
-
-  return resolvedSymlinks;
+  // Airbnb Edit:
+  // We are making this function return an empty array in our fork because
+  // we dont use this feature, and it ends up being problematic with the way
+  // we check in some of our node_modules. This change should no longer be needed
+  // if we ever get to a place where we *dont* check in any of our node_modules
+  // so every build runs off of a clean `npm install` with an empty node_modules
+  // folder. Until that day...
+  return [];
 };
 
 function rootExists(roots, child) {
