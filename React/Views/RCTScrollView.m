@@ -57,6 +57,11 @@
     _scrollView = scrollView;
     _userData = userData;
     _coalescingKey = coalescingKey;
+#ifdef __IPHONE_11_0
+    if (@available(ios 11, *)) {
+      _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+#endif
   }
   return self;
 }
