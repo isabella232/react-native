@@ -207,11 +207,10 @@ class AlertIOS {
         'keyboardType) and the old syntax will be removed in a future version.');
 
       var callback = type;
-      var defaultValue = message;
       RCTAlertManager.alertWithArgs({
         title: title || undefined,
         type: 'plain-text',
-        defaultValue,
+        defaultValue: message,
       }, (id, value) => {
         callback(value);
       });
