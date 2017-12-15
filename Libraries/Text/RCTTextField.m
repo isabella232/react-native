@@ -293,6 +293,18 @@ static void RCTUpdatePlaceholder(RCTTextField *self)
   [self reactFocusIfNeeded];
 }
 
+- (BOOL)isAccessibilityElement {
+  // Always return NO to enumerate child elements. Otherwise the "clear text" button is hidden
+  // from accessibility interface.
+  return NO;
+}
+
+- (BOOL)accessibilityElementsHidden {
+  // If "accessible" prop is set to false on TextInput, disable all accessible children.
+  // Without this function the "clear text" UIButton is still exposed.
+  return ![super isAccessibilityElement];
+}
+
 #pragma mark - UITextFieldDelegate (Proxied)
 
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
