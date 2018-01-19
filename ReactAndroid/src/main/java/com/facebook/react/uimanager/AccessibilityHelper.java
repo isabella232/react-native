@@ -54,7 +54,7 @@ import com.facebook.react.bridge.ReadableType;
           };
           break;
       }
-    } else {
+    } else if (dynamic.getType() == ReadableType.Array) {
       ReadableArray componentTypeArray = dynamic.asArray();
 
       for (int i = 0; i < componentTypeArray.size(); i++) {
@@ -64,6 +64,8 @@ import com.facebook.react.bridge.ReadableType;
           break;
         };
       }
+    } else {
+      delegate = null;
     }
 
     view.setAccessibilityDelegate(delegate);
