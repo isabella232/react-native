@@ -145,21 +145,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   return RCTRecursiveAccessibilityLabel(self);
 }
 
--(NSInteger)accessibilityElementCount
-{
-  return self.subviews.count;
-}
-
--(id)accessibilityElementAtIndex:(NSInteger)index
-{
-  return [self.subviews objectAtIndex:index];
-}
-
--(NSInteger)indexOfAccessibilityElement:(id)element
-{
-  return [self.subviews indexOfObject:element];
-}
-
 - (void)setPointerEvents:(RCTPointerEvents)pointerEvents
 {
   _pointerEvents = pointerEvents;
